@@ -2,8 +2,8 @@
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
-Version:	2.0.0
-Release:	2
+Version:	2.1.0
+Release:	1
 License:	distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tgz
@@ -37,7 +37,7 @@ jednym z wielu dostepnych wariantów Angbandu.
 # Only build ncurses version (see makefile patch), because I didn't
 # manage to build any other working version
 cd src
-%{__make} -f makefile.org \
+%{__make} -f makefile.std \
 	COPTS="%{rpmcflags}" \
 	CC="%{__cc}"
 
