@@ -1,15 +1,16 @@
---- tome100-src-org/src/makefile.org	Sun May  5 00:45:44 2002
-+++ tome100-src/src/makefile.org	Thu May  9 00:21:02 2002
-@@ -56,7 +56,7 @@
- # Comment out this line if you don't want Lua scripting
+diff -ur tome-200-src-org/src/makefile.org tome-200-src/src/makefile.org
+--- tome-200-src-org/src/makefile.org	Sun May 12 14:40:28 2002
++++ tome-200-src/src/makefile.org	Wed Aug 28 10:15:18 2002
+@@ -60,7 +60,7 @@
  LUA=TRUE
  
--IRCARGS = -DUSE_SOCK -DUSE_UNIXSOCK -DIRC_SERVER=\"irc.worldirc.org\" -DIRC_PORT=\"6667\" -DIRC_CHANNEL=\"\#*bandirc\"
-+#IRCARGS = -DUSE_SOCK -DUSE_UNIXSOCK -DIRC_SERVER=\"irc.worldirc.org\" -DIRC_PORT=\"6667\" -DIRC_CHANNEL=\"\#*bandirc\"
+ # Comment out this line if you don't want the IRC support
+-IRC=TRUE
++# IRC=TRUE
  
  
  ##
-@@ -74,7 +74,7 @@
+@@ -78,7 +78,7 @@
  ##
  
  # Where lib/ files goes
@@ -18,31 +19,33 @@
  # Sysadmins of commercial Unix and/or BSD might prefer this
  #LIBDIR = /usr/local/lib/tome/
  # If you like the old default, use this one
-@@ -84,7 +84,7 @@
+@@ -88,7 +88,7 @@
  
  
- # Where T.o.M.E. binary goes
+ # Where PernAngband binary goes
 -BINDIR = /usr/local/games
 +BINDIR = /usr/games
  # Another common location
  #BINDIR = /usr/local/bin
  
-@@ -142,10 +142,10 @@
+@@ -146,11 +146,11 @@
  # including "USE_GETCH" and "USE_CURS_SET".  Note that "config.h" will
  # attempt to "guess" at many of these flags based on your system.
  #
 -COPTS = -Wall -O1 -pipe -g
 -INCLUDES = -I/usr/X11R6/include
--DEFINES = -DUSE_X11 -DUSE_GCU -DSUPPORT_GAMMA
+-DEFINES = -DUSE_X11 -DUSE_GCU \
+-	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA
 -LIBS = -lX11 -lcurses -L/usr/X11R6/lib
-+#COPTS = -Wall -O1 -pipe -g
-+#INCLUDES = -I/usr/X11R6/include
-+#DEFINES = -DUSE_NCURSES -DUSE_X11 -DUSE_GCU -DSUPPORT_GAMMA
-+#LIBS = -lX11 -lncurses -L/usr/X11R6/lib
++# COPTS = -Wall -O1 -pipe -g
++# INCLUDES = -I/usr/X11R6/include
++# DEFINES = -DUSE_X11 -DUSE_GCU \
++# 	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA
++# LIBS = -lX11 -lcurses -L/usr/X11R6/lib
  
  
  ##
-@@ -168,10 +168,10 @@
+@@ -173,10 +173,10 @@
  ##
  ## Variation -- Only support "main-gcu.c" (not "main-x11.c")
  ##
@@ -53,7 +56,7 @@
 +COPTS = -Wall -O1 -pipe -g
 +INCLUDES = -I/usr/include/ncurses
 +DEFINES = -DUSE_GCU -DUSE_NCURSES
-+LIBS = -lncurses
++LIBS = -lcurses
  
  
  ##

@@ -1,6 +1,7 @@
-diff -ruN tome100-src.orig/src/init2.c tome100-src/src/init2.c
---- tome100-src.orig/src/init2.c	Sun May  5 00:45:44 2002
-+++ tome100-src/src/init2.c	Tue May 14 17:21:51 2002
+Only in tome-200-src/src: .makefile.org.swp
+diff -ur tome-200-src-org/src/init2.c tome-200-src/src/init2.c
+--- tome-200-src-org/src/init2.c	Fri Jul 12 13:56:06 2002
++++ tome-200-src/src/init2.c	Wed Aug 28 10:32:40 2002
 @@ -72,7 +72,10 @@
  void init_file_paths(char *path)
  {
@@ -36,8 +37,8 @@ diff -ruN tome100-src.orig/src/init2.c tome100-src/src/init2.c
 +	ANGBAND_DIR_BONE = string_make(path2);
  
  	/* Build a path name */
-         strcpy(tail, "dngn");
-         ANGBAND_DIR_DNGN = string_make(path);
+ 	strcpy(tail, "dngn");
+ 	ANGBAND_DIR_DNGN = string_make(path);
  
  	/* Build a path name */
 -	strcpy(tail, "data");
@@ -48,7 +49,7 @@ diff -ruN tome100-src.orig/src/init2.c tome100-src/src/init2.c
  	/* Build a path name */
  	strcpy(tail, "edit");
 @@ -169,8 +173,8 @@
-         ANGBAND_DIR_NOTE = string_make(path);
+ 	ANGBAND_DIR_NOTE = string_make(path);
  
  	/* Build a path name */
 -	strcpy(tail, "save");
@@ -57,11 +58,11 @@ diff -ruN tome100-src.orig/src/init2.c tome100-src/src/init2.c
 +	ANGBAND_DIR_SAVE = string_make(path2);
  
  	/* Build a path name */
-         strcpy(tail, "scpt");
-diff -ruN tome100-src.orig/src/makefile.org tome100-src/src/makefile.org
---- tome100-src.orig/src/makefile.org	Tue May 14 17:11:37 2002
-+++ tome100-src/src/makefile.org	Tue May 14 17:11:51 2002
-@@ -75,6 +75,7 @@
+ 	strcpy(tail, "scpt");
+diff -ur tome-200-src-org/src/makefile.org tome-200-src/src/makefile.org
+--- tome-200-src-org/src/makefile.org	Wed Aug 28 10:31:13 2002
++++ tome-200-src/src/makefile.org	Wed Aug 28 10:33:49 2002
+@@ -79,6 +79,7 @@
  
  # Where lib/ files goes
  LIBDIR = /usr/share/games/tome/
@@ -69,12 +70,12 @@ diff -ruN tome100-src.orig/src/makefile.org tome100-src/src/makefile.org
  # Sysadmins of commercial Unix and/or BSD might prefer this
  #LIBDIR = /usr/local/lib/tome/
  # If you like the old default, use this one
-@@ -345,7 +346,7 @@
+@@ -366,7 +367,7 @@
  # Compiler options
  #
  
--CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\" $(IRCARGS)
-+CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DVAR_PATH=\"$(VARDIR)\" -DDEFAULT_PATH=\"$(LIBDIR)\" $(IRCARGS)
+-CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\"
++CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DVAR_PATH=\"$(VARDIR)\" -DDEFAULT_PATH=\"$(LIBDIR)\"
  
  
  #
