@@ -1,4 +1,3 @@
-
 %define		file_version	%(echo %{version} | tr -d .)
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
@@ -8,6 +7,7 @@ Release:	1
 License:	Distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/pernangband/dl/%{name}-%{file_version}-src.tar.gz
+Source1:	%{name}.png
 Patch0:		%{name}-makefile.patch
 URL:		http://www.t-o-m-e.net
 BuildRequires:	ncurses-devel
@@ -35,8 +35,7 @@ cd src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/games/tome
-install -d $RPM_BUILD_ROOT/var/games/tome/{apex,save,data}
+install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome,/var/games/tome/{apex,save,data},%{_pixmapsdir},%{_applnkdir}/Games/Roguelike}
 
 cd src
 %{__make} install -f makefile.org DESTDIR=$RPM_BUILD_ROOT
@@ -59,6 +58,17 @@ ln -sf /var/games/tome/apex $RPM_BUILD_ROOT%{_datadir}/games/tome/apex
 # belongs to /var
 ln -sf /var/games/tome/data $RPM_BUILD_ROOT%{_datadir}/games/tome/data
 
+install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}
+cat >$RPM_BUILD_ROOT%{_applnkdir}/Games/Roguelike/tome.desktop <<EOF
+[Desktop Entry]
+Name=tome
+Comment=Troubles of Middle Earth
+Comment[pl]=K³opoty ¦ródziemia
+Icon=tome.png
+Exec=%{_prefix}/games/%{name}
+Terminal=0
+Type=Application
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,3 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(2755,root,games) %{_prefix}/games/%{name}
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
+%{_pixmapsdir}/*
+%{_applnkdir}/Games/Roguelike/*
