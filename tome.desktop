@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=tome
 Comment=Troubles of Middle Earth
-Comment[pl]=K³opoty ¦ródziemia
+Comment[pl]=KÅ‚opoty Å›rÃ³dziemia
 Icon=tome.png
 Exec=tome
 Terminal=1
 Type=Application
-
+# vi: encoding=utf-8
