@@ -1,7 +1,6 @@
-Only in tome-200-src/src: .makefile.org.swp
-diff -ur tome-200-src-org/src/init2.c tome-200-src/src/init2.c
---- tome-200-src-org/src/init2.c	Fri Jul 12 13:56:06 2002
-+++ tome-200-src/src/init2.c	Wed Aug 28 10:32:40 2002
+diff -ur tome-210-src-org/src/init2.c tome-210-src/src/init2.c
+--- tome-210-src-org/src/init2.c	Fri Jul 12 13:56:06 2002
++++ tome-210-src/src/init2.c	Wed Aug 28 10:32:40 2002
 @@ -72,7 +72,10 @@
  void init_file_paths(char *path)
  {
@@ -59,9 +58,9 @@ diff -ur tome-200-src-org/src/init2.c tome-200-src/src/init2.c
  
  	/* Build a path name */
  	strcpy(tail, "scpt");
-diff -ur tome-200-src-org/src/makefile.org tome-200-src/src/makefile.org
---- tome-200-src-org/src/makefile.org	Wed Aug 28 10:31:13 2002
-+++ tome-200-src/src/makefile.org	Wed Aug 28 10:33:49 2002
+diff -ur tome-210-src-org/src/makefile.std tome-210-src/src/makefile.std
+--- tome-210-src-org/src/makefile.std	Wed Aug 28 10:31:13 2002
++++ tome-210-src/src/makefile.std	Wed Aug 28 10:33:49 2002
 @@ -79,6 +79,7 @@
  
  # Where lib/ files goes

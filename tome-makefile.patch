@@ -1,51 +1,55 @@
-diff -ur tome-200-src-org/src/makefile.org tome-200-src/src/makefile.org
---- tome-200-src-org/src/makefile.org	Sun May 12 14:40:28 2002
-+++ tome-200-src/src/makefile.org	Wed Aug 28 10:15:18 2002
+--- tome-210-src-org/src/makefile.std	Mon Nov 25 00:42:24 2002
++++ tome-210-src/src/makefile.std	Sun Dec 15 14:03:28 2002
 @@ -60,7 +60,7 @@
  LUA=TRUE
  
  # Comment out this line if you don't want the IRC support
 -IRC=TRUE
-+# IRC=TRUE
- 
++#IRC=TRUE
  
  ##
-@@ -78,7 +78,7 @@
+ ## 2. Installation locations and such
+@@ -77,17 +77,17 @@
  ##
  
  # Where lib/ files goes
--LIBDIR = /usr/lib/games/tome/
+-#LIBDIR = /usr/lib/games/tome/
 +LIBDIR = /usr/share/games/tome/
  # Sysadmins of commercial Unix and/or BSD might prefer this
  #LIBDIR = /usr/local/lib/tome/
  # If you like the old default, use this one
-@@ -88,7 +88,7 @@
+-LIBDIR = ./lib/
++#LIBDIR = ./lib/
+ # Another example: single user installation using absolute path
+ #LIBDIR = /home/myloginname/lib/tome/
  
  
- # Where PernAngband binary goes
+ # Where ToME binary goes
 -BINDIR = /usr/local/games
 +BINDIR = /usr/games
  # Another common location
  #BINDIR = /usr/local/bin
  
-@@ -146,11 +146,11 @@
+@@ -148,12 +148,12 @@
  # including "USE_GETCH" and "USE_CURS_SET".  Note that "config.h" will
  # attempt to "guess" at many of these flags based on your system.
  #
 -COPTS = -Wall -O1 -pipe -g
 -INCLUDES = -I/usr/X11R6/include
 -DEFINES = -DUSE_X11 -DUSE_GCU \
--	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA
+-	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA \
+-        -DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
 -LIBS = -lX11 -lcurses -L/usr/X11R6/lib
-+# COPTS = -Wall -O1 -pipe -g
-+# INCLUDES = -I/usr/X11R6/include
-+# DEFINES = -DUSE_X11 -DUSE_GCU \
-+# 	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA
-+# LIBS = -lX11 -lcurses -L/usr/X11R6/lib
++#COPTS = -Wall -O1 -pipe -g
++#INCLUDES = -I/usr/X11R6/include
++#DEFINES = -DUSE_X11 -DUSE_GCU \
++#	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA \
++#        -DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
++#LIBS = -lX11 -lcurses -L/usr/X11R6/lib
  
  
  ##
-@@ -173,10 +173,10 @@
+@@ -176,10 +176,10 @@
  ##
  ## Variation -- Only support "main-gcu.c" (not "main-x11.c")
  ##
