@@ -2,11 +2,11 @@
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
-Version:	1.0.0
-Release:	4
+Version:	2.0.0
+Release:	1
 License:	distributable
 Group:		Applications/Games
-Source0:	http://t-o-m-e.net/pernangband/dl/%{name}-%{file_version}-src.tar.gz
+Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tgz
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
@@ -28,7 +28,7 @@ roguelike osadzona w ¶wiecie stworzonym przez JRR Tolkiena. ToME jest
 jednym z wielu dostepnych wariantów Angbandu.
 
 %prep
-%setup -q -n %{name}%{file_version}-src
+%setup -q -n %{name}-%{file_version}-src
 %patch0 -p1
 %patch1 -p1
 
