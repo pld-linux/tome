@@ -1,6 +1,6 @@
-diff -ur tome100-src-org/src/init2.c tome100-src-newest/src/init2.c
---- tome100-src-org/src/init2.c	Sun May  5 00:45:44 2002
-+++ tome100-src-newest/src/init2.c	Mon May 13 10:39:14 2002
+diff -ruN tome100-src.orig/src/init2.c tome100-src/src/init2.c
+--- tome100-src.orig/src/init2.c	Sun May  5 00:45:44 2002
++++ tome100-src/src/init2.c	Tue May 14 17:21:51 2002
 @@ -72,7 +72,10 @@
  void init_file_paths(char *path)
  {
@@ -20,7 +20,7 @@ diff -ur tome100-src-org/src/init2.c tome100-src-newest/src/init2.c
  
  
  #ifdef VM
-@@ -133,8 +137,8 @@
+@@ -133,20 +137,20 @@
  	/*** Build the sub-directory names ***/
  
  	/* Build a path name */
@@ -30,8 +30,13 @@ diff -ur tome100-src-org/src/init2.c tome100-src-newest/src/init2.c
 +	ANGBAND_DIR_APEX = string_make(path2);
  
  	/* Build a path name */
- 	strcpy(tail, "bone");
-@@ -145,8 +149,8 @@
+-	strcpy(tail, "bone");
+-	ANGBAND_DIR_BONE = string_make(path);
++	strcpy(tail2, "bone");
++	ANGBAND_DIR_BONE = string_make(path2);
+ 
+ 	/* Build a path name */
+         strcpy(tail, "dngn");
          ANGBAND_DIR_DNGN = string_make(path);
  
  	/* Build a path name */
@@ -53,9 +58,9 @@ diff -ur tome100-src-org/src/init2.c tome100-src-newest/src/init2.c
  
  	/* Build a path name */
          strcpy(tail, "scpt");
-diff -ur tome100-src-org/src/makefile.org tome100-src-newest/src/makefile.org
---- tome100-src-org/src/makefile.org	Mon May 13 11:01:35 2002
-+++ tome100-src-newest/src/makefile.org	Mon May 13 11:03:40 2002
+diff -ruN tome100-src.orig/src/makefile.org tome100-src/src/makefile.org
+--- tome100-src.orig/src/makefile.org	Tue May 14 17:11:37 2002
++++ tome100-src/src/makefile.org	Tue May 14 17:11:51 2002
 @@ -75,6 +75,7 @@
  
  # Where lib/ files goes
