@@ -6,4 +6,5 @@ Icon=tome.png
 Exec=tome
 Terminal=1
 Type=Application
+Encoding=UTF-8
 # vi: encoding=utf-8
