@@ -9,8 +9,10 @@ Group:		Applications/Games
 Source0:	http://t-o-m-e.net/pernangband/dl/%{name}-%{file_version}-src.tar.gz
 Source1:	%{name}.png
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-paths.patch
 URL:		http://www.t-o-m-e.net
 BuildRequires:	ncurses-devel
+BuildRequires:	textutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,37 +28,25 @@ jednym z wielu dostepnych wariantów Angbandu.
 %prep
 %setup -q -n %{name}%{file_version}-src
 %patch0 -p1
+%patch1 -p1
 
 %build
-# Only build ncurses version (see patch), because I didn't manage to
-# build any other working version
+# Only build ncurses version (see makefile patch), because I didn't
+# manage to build any other working version
 cd src
 %{__make} -f makefile.org
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome,/var/games/tome/{apex,save,data},%{_pixmapsdir},%{_applnkdir}/Games/Roguelike}
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT%{_datadir}/games/tome
+install -d $RPM_BUILD_ROOT%{_datadir}/games/tome/{bone,cmov,dngn,edit,file,help,info,note,pref,scpt,user}
+install -d $RPM_BUILD_ROOT/var/games/tome/{apex,save,data}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/Roguelike}
 
-cd src
-%{__make} install -f makefile.org DESTDIR=$RPM_BUILD_ROOT
-rm -rf $RPM_BUILD_ROOT%{_datadir}/games/tome/save
-rm -rf $RPM_BUILD_ROOT%{_datadir}/games/tome/apex
-rm -rf $RPM_BUILD_ROOT%{_datadir}/games/tome/data
-# It doesn't look like files in this directory are currently used - 
-# greatly reduces disk usage.
-rm -rf $RPM_BUILD_ROOT%{_datadir}/games/tome/xtra
-
-# According to FHS "save" and "apex" directories should be placed in
-# /var/games, but ToME expects them to be in /usr/share/games/tome.
-# We can modify sources, but it's not trivial, so I decided to use
-# symlinks...
-ln -sf /var/games/tome/save $RPM_BUILD_ROOT%{_datadir}/games/tome/save
-ln -sf /var/games/tome/apex $RPM_BUILD_ROOT%{_datadir}/games/tome/apex
-# This is another story - contents of this directory are generated
-# from files in 'edit" directory during the first ToME run, and may be
-# later regenerated (when orginal file in "edit" changes), so it
-# belongs to /var
-ln -sf /var/games/tome/data $RPM_BUILD_ROOT%{_datadir}/games/tome/data
+cp src/tome $RPM_BUILD_ROOT%{_bindir}
+cp -r lib/{bone,cmov,dngn,edit,file,help,info,note,pref,scpt,user} $RPM_BUILD_ROOT%{_datadir}/games/tome
+cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}
 cat >$RPM_BUILD_ROOT%{_applnkdir}/Games/Roguelike/tome.desktop <<EOF
@@ -65,7 +55,7 @@ Name=tome
 Comment=Troubles of Middle Earth
 Comment[pl]=K³opoty ¦ródziemia
 Icon=tome.png
-Exec=%{_prefix}/games/%{name}
+Exec=%{_bindir}/%{name}
 Terminal=0
 Type=Application
 EOF
@@ -75,8 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%doc *.gz
-%attr(2755,root,games) %{_prefix}/games/%{name}
+%attr(2755,root,games) %{_bindir}/%{name}
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
 %{_pixmapsdir}/*
