@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=tome
+Comment=Troubles of Middle Earth
+Comment[pl]=K³opoty ¦ródziemia
+Icon=tome.png
+Exec=tome
+Terminal=1
+Type=Application
+
