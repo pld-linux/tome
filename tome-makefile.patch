@@ -30,25 +30,25 @@
  # Another common location
  #BINDIR = /usr/local/bin
  
-@@ -148,12 +148,12 @@
+@@ -152,12 +152,12 @@
  # including "USE_GETCH" and "USE_CURS_SET".  Note that "config.h" will
  # attempt to "guess" at many of these flags based on your system.
  #
 -COPTS = -Wall -O1 -pipe -g
 -INCLUDES = -I/usr/X11R6/include
--DEFINES = -DUSE_X11 -DUSE_GCU \
+-DEFINES = -DUSE_X11 \
 -	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA \
--        -DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
--LIBS = -lX11 -lcurses -L/usr/X11R6/lib
+-	-DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
+-LIBS = -lX11 -L/usr/X11R6/lib
 +#COPTS = -Wall -O1 -pipe -g
 +#INCLUDES = -I/usr/X11R6/include
-+#DEFINES = -DUSE_X11 -DUSE_GCU \
++#DEFINES = -DUSE_X11 \
 +#	-DUSE_EGO_GRAPHICS -DUSE_TRANSPARENCY -DSUPPORT_GAMMA \
-+#        -DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
-+#LIBS = -lX11 -lcurses -L/usr/X11R6/lib
++#	-DUSE_PRECISE_CMOVIE -DUSE_UNIXSOCK
++#LIBS = -lX11 -L/usr/X11R6/lib
  
  
- ##
+ 
 @@ -176,10 +176,10 @@
  ##
  ## Variation -- Only support "main-gcu.c" (not "main-x11.c")

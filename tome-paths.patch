@@ -1,26 +1,55 @@
-diff -ur tome-210-src-org/src/init2.c tome-210-src/src/init2.c
---- tome-210-src-org/src/init2.c	Fri Jul 12 13:56:06 2002
-+++ tome-210-src/src/init2.c	Wed Aug 28 10:32:40 2002
-@@ -72,7 +72,10 @@
+--- tome/src/makefile.std~	2004-01-16 22:17:12.951756240 +0100
++++ tome/src/makefile.std	2004-01-16 22:33:00.685308461 +0100
+@@ -78,6 +78,8 @@
+ 
+ # Where lib/ files goes
+ LIBDIR = /usr/share/games/tome/
++VARDIR = /var/games/tome/
++
+ # Sysadmins of commercial Unix and/or BSD might prefer this
+ #LIBDIR = /usr/local/lib/tome/
+ # If you like the old default, use this one
+@@ -383,7 +385,7 @@
+ # Compiler options
+ #
+ 
+-CFLAGS = $(COPTS) $(PROFILECOPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\"
++CFLAGS = $(COPTS) $(PROFILECOPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\" -DVAR_PATH=\"$(VARDIR)\"
+ 
+ 
+ #
+--- tome/src/init2.c~	2003-12-11 21:32:41.000000000 +0100
++++ tome/src/init2.c	2004-01-16 22:32:06.689380960 +0100
+@@ -71,8 +71,10 @@
+  */
  void init_file_paths(char *path)
  {
- 	char *tail;
-+	char *tail2;
+-	char *tail;
+-	int   pathlen;
++	char *tail,*tail2;
++	int   pathlen,pathlen2;
 +	char path2[256];
- 
 +	strcpy(path2, VAR_PATH);
  
  	/*** Free everything ***/
  
-@@ -104,6 +107,7 @@
+@@ -103,6 +105,7 @@
+ 	/*** Prepare the "path" ***/
+ 
+ 	pathlen = strlen(path);
++	pathlen2 = strlen(path2);
+ 
+ 	/* Hack -- save the main directory without trailing PATH_SEP if present */
+ 	if (strlen(PATH_SEP) > 0 && pathlen > 0)
+@@ -127,6 +130,7 @@
  
  	/* Prepare to append to the Base Path */
- 	tail = path + strlen(path);
-+	tail2 = path2 + strlen(path2);
+ 	tail = path + pathlen;
++	tail2 = path2 + pathlen2;
  
  
- #ifdef VM
-@@ -133,20 +137,20 @@
+ 
+@@ -160,12 +164,12 @@
  	/*** Build the sub-directory names ***/
  
  	/* Build a path name */
@@ -36,7 +65,8 @@ diff -ur tome-210-src-org/src/init2.c tome-210-src/src/init2.c
 +	ANGBAND_DIR_BONE = string_make(path2);
  
  	/* Build a path name */
- 	strcpy(tail, "dngn");
+ 	strcpy(tail, "core");
+@@ -176,8 +180,8 @@
  	ANGBAND_DIR_DNGN = string_make(path);
  
  	/* Build a path name */
@@ -47,8 +77,8 @@ diff -ur tome-210-src-org/src/init2.c tome-210-src/src/init2.c
  
  	/* Build a path name */
  	strcpy(tail, "edit");
-@@ -169,8 +173,8 @@
- 	ANGBAND_DIR_NOTE = string_make(path);
+@@ -232,8 +236,8 @@
+ #else /* PRIVATE_USER_PATH */
  
  	/* Build a path name */
 -	strcpy(tail, "save");
@@ -57,24 +87,4 @@ diff -ur tome-210-src-org/src/init2.c tome-210-src/src/init2.c
 +	ANGBAND_DIR_SAVE = string_make(path2);
  
  	/* Build a path name */
- 	strcpy(tail, "scpt");
-diff -ur tome-210-src-org/src/makefile.std tome-210-src/src/makefile.std
---- tome-210-src-org/src/makefile.std	Wed Aug 28 10:31:13 2002
-+++ tome-210-src/src/makefile.std	Wed Aug 28 10:33:49 2002
-@@ -79,6 +79,7 @@
- 
- # Where lib/ files goes
- LIBDIR = /usr/share/games/tome/
-+VARDIR = /var/games/tome/
- # Sysadmins of commercial Unix and/or BSD might prefer this
- #LIBDIR = /usr/local/lib/tome/
- # If you like the old default, use this one
-@@ -366,7 +367,7 @@
- # Compiler options
- #
- 
--CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\"
-+CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DVAR_PATH=\"$(VARDIR)\" -DDEFAULT_PATH=\"$(LIBDIR)\"
- 
- 
- #
+ 	strcpy(tail, "user");
