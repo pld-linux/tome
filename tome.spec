@@ -7,6 +7,7 @@ Release:	1
 License:	distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tgz
+# Source0-md5:	bda364543e66497581d2267e7b99424f
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
