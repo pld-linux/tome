@@ -3,11 +3,12 @@ Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
 Version:	1.0.0
-Release:	1
+Release:	2
 License:	Distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/pernangband/dl/%{name}-%{file_version}-src.tar.gz
 Source1:	%{name}.png
+Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-paths.patch
 URL:		http://www.t-o-m-e.net
@@ -49,16 +50,7 @@ cp -r lib/{bone,cmov,dngn,edit,file,help,info,note,pref,scpt,user} $RPM_BUILD_RO
 cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}
-cat >$RPM_BUILD_ROOT%{_applnkdir}/Games/Roguelike/tome.desktop <<EOF
-[Desktop Entry]
-Name=tome
-Comment=Troubles of Middle Earth
-Comment[pl]=K³opoty ¦ródziemia
-Icon=tome.png
-Exec=%{_bindir}/%{name}
-Terminal=0
-Type=Application
-EOF
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Roguelike/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
