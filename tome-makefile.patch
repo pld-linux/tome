@@ -57,24 +57,3 @@
  
  
  ##
-@@ -393,13 +393,13 @@
- 	cp -f $(TARGET) ..
- 
- install: default
--	[ -d $(LIBDIR) ] || mkdir -p $(LIBDIR)
--	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
--	cp -r ../lib/* $(LIBDIR)
--	chown -R $(OWNER) $(LIBDIR)
--	cp -f $(TARGET) $(BINDIR)/$(TARGET)
--	chown $(OWNER) $(BINDIR)/$(TARGET)
--	chmod 4755 $(BINDIR)/$(TARGET)
-+	[ -d $(DESTDIR)$(LIBDIR) ] || mkdir -p $(DESTDIR)$(LIBDIR)
-+	[ -d $(DESTDIR)$(BINDIR) ] || mkdir -p $(DESTDIR)$(BINDIR)
-+	cp -r ../lib/* $(DESTDIR)$(LIBDIR)
-+#	chown -R $(OWNER) $(DESTDIR)$(LIBDIR)
-+	cp -f $(TARGET) $(DESTDIR)$(BINDIR)/$(TARGET)
-+#	chown $(OWNER) $(DESTDIR)$(BINDIR)/$(TARGET)
-+#	chmod 4755 $(DESTDIR)$(BINDIR)/$(TARGET)
- 
- # old-install: $(TARGET)
- #	cp $(TARGET) ..
