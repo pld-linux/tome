@@ -42,7 +42,7 @@ cd src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome/{cmov,dngn,edit,file,help,info,note,pref,scpt,user,mods},/var/games/tome/{apex,save,data,bone},%{_pixmapsdir},%{_applnkdir}/Games/RPG}
+install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome/{cmov,dngn,edit,file,help,info,note,pref,scpt,user,mods},/var/games/tome/{apex,save,data,bone},%{_pixmapsdir},%{_desktopdir}}
 
 install -D src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
 cp -r lib/{cmov,core,dngn,edit,file,help,info,note,pref,scpt,user,mods,module.lua} $RPM_BUILD_ROOT%{_datadir}/games/tome
@@ -50,7 +50,7 @@ cp -r lib/{cmov,core,dngn,edit,file,help,info,note,pref,scpt,user,mods,module.lu
 #cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/RPG/
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,4 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
 %{_pixmapsdir}/*
-%{_applnkdir}/Games/RPG/*
+%{_desktopdir}/*
