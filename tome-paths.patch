@@ -1,0 +1,75 @@
+diff -ur tome100-src-org/src/init2.c tome100-src-newest/src/init2.c
+--- tome100-src-org/src/init2.c	Sun May  5 00:45:44 2002
++++ tome100-src-newest/src/init2.c	Mon May 13 10:39:14 2002
+@@ -72,7 +72,10 @@
+ void init_file_paths(char *path)
+ {
+ 	char *tail;
++	char *tail2;
++	char path2[256];
+ 
++	strcpy(path2, VAR_PATH);
+ 
+ 	/*** Free everything ***/
+ 
+@@ -104,6 +107,7 @@
+ 
+ 	/* Prepare to append to the Base Path */
+ 	tail = path + strlen(path);
++	tail2 = path2 + strlen(path2);
+ 
+ 
+ #ifdef VM
+@@ -133,8 +137,8 @@
+ 	/*** Build the sub-directory names ***/
+ 
+ 	/* Build a path name */
+-	strcpy(tail, "apex");
+-	ANGBAND_DIR_APEX = string_make(path);
++	strcpy(tail2, "apex");
++	ANGBAND_DIR_APEX = string_make(path2);
+ 
+ 	/* Build a path name */
+ 	strcpy(tail, "bone");
+@@ -145,8 +149,8 @@
+         ANGBAND_DIR_DNGN = string_make(path);
+ 
+ 	/* Build a path name */
+-	strcpy(tail, "data");
+-	ANGBAND_DIR_DATA = string_make(path);
++	strcpy(tail2, "data");
++	ANGBAND_DIR_DATA = string_make(path2);
+ 
+ 	/* Build a path name */
+ 	strcpy(tail, "edit");
+@@ -169,8 +173,8 @@
+         ANGBAND_DIR_NOTE = string_make(path);
+ 
+ 	/* Build a path name */
+-	strcpy(tail, "save");
+-	ANGBAND_DIR_SAVE = string_make(path);
++	strcpy(tail2, "save");
++	ANGBAND_DIR_SAVE = string_make(path2);
+ 
+ 	/* Build a path name */
+         strcpy(tail, "scpt");
+diff -ur tome100-src-org/src/makefile.org tome100-src-newest/src/makefile.org
+--- tome100-src-org/src/makefile.org	Mon May 13 11:01:35 2002
++++ tome100-src-newest/src/makefile.org	Mon May 13 11:03:40 2002
+@@ -75,6 +75,7 @@
+ 
+ # Where lib/ files goes
+ LIBDIR = /usr/share/games/tome/
++VARDIR = /var/games/tome/
+ # Sysadmins of commercial Unix and/or BSD might prefer this
+ #LIBDIR = /usr/local/lib/tome/
+ # If you like the old default, use this one
+@@ -345,7 +346,7 @@
+ # Compiler options
+ #
+ 
+-CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DDEFAULT_PATH=\"$(LIBDIR)\" $(IRCARGS)
++CFLAGS = $(COPTS) $(INCLUDES) $(DEFINES) -DVAR_PATH=\"$(VARDIR)\" -DDEFAULT_PATH=\"$(LIBDIR)\" $(IRCARGS)
+ 
+ 
+ #
