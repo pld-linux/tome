@@ -57,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README *.txt
 %attr(2755,root,games) %{_bindir}/%{name}
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
