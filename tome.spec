@@ -37,7 +37,7 @@ jednym z wielu dostepnych wariantów Angbandu.
 # manage to build any other working version
 cd src
 %{__make} -f makefile.org \
-	COPTS="%{optflags}" \
+	COPTS="%{rpmcflags}" \
 	CC="%{__cc}"
 
 %install
