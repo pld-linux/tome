@@ -6,6 +6,6 @@ Icon=tome.png
 Exec=tome
 Terminal=true
 Type=Application
-Categories=Game;X-RPGGame;
+Categories=Game;RolePlaying
 Encoding=UTF-8
 # vi: encoding=utf-8
