@@ -14,7 +14,6 @@ Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-paths.patch
 URL:		http://www.t-o-m-e.net/
 BuildRequires:	ncurses-devel
-Requires:	applnk >= 1.5.13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_bindir		%{_prefix}/games
