@@ -12,7 +12,7 @@ Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-paths.patch
-URL:		http://www.t-o-m-e.net
+URL:		http://www.t-o-m-e.net/
 BuildRequires:	ncurses-devel
 Requires:	applnk >= 1.5.13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
