@@ -25,7 +25,7 @@ Angband variants.
 %description -l pl
 "Troubles of Middle Earth" (dawniej PernAngband) to rozbudowana gra
 roguelike osadzona w ¶wiecie stworzonym przez JRR Tolkiena. ToME jest
-jednym z wielu dostepnych wariantów Angbandu.
+jednym z wielu dostêpnych wariantów Angbandu.
 
 %prep
 %setup -q -n %{name}-%{file_version}-src
