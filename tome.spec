@@ -17,8 +17,6 @@ BuildRequires:	ncurses-devel
 Conflicts:	applnk < 1.5.13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_bindir		%{_prefix}/games
-
 %description
 Troubles of Middle Earth (formerly PernAngband) is a complex roguelike
 game based on the world created by JRR Tolkien. ToME is one of many
@@ -44,14 +42,10 @@ cd src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{_datadir}/games/tome
-install -d $RPM_BUILD_ROOT%{_datadir}/games/tome/{cmov,dngn,edit,file,help,info,note,pref,scpt,user}
-install -d $RPM_BUILD_ROOT/var/games/tome/{apex,save,data,bone}
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Games/RPG}
+install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome/{cmov,dngn,edit,file,help,info,note,pref,scpt,user,mods},/var/games/tome/{apex,save,data,bone},%{_pixmapsdir},%{_applnkdir}/Games/RPG}
 
-cp src/tome $RPM_BUILD_ROOT%{_bindir}
-cp -r lib/{cmov,dngn,edit,file,help,info,note,pref,scpt,user} $RPM_BUILD_ROOT%{_datadir}/games/tome
+install -D src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
+cp -r lib/{cmov,core,dngn,edit,file,help,info,note,pref,scpt,user,mods,module.lua} $RPM_BUILD_ROOT%{_datadir}/games/tome
 # do not copy placeholders; bones are unnecessary
 #cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
 
