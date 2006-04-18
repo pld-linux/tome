@@ -3,7 +3,7 @@ Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
 Version:	2.2.5
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tgz
