@@ -62,4 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
 %{_pixmapsdir}/*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
