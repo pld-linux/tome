@@ -1,13 +1,16 @@
+# TODO:
+#	- disable IRC support?
+#
 %define		file_version	%(echo %{version} | tr -d .)
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
-Version:	2.2.5
-Release:	3
+Version:	2.3.4
+Release:	1
 License:	distributable
 Group:		Applications/Games
-Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tgz
-# Source0-md5:	b1a340a6092fd53b07be9d107b16e16b
+Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tar.bz2
+# Source0-md5:	a97dc78e8964987adc6c0a796b560a14
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
@@ -57,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README *.txt
+%doc *.txt
 %attr(2755,root,games) %{_bindir}/%{name}
 %{_datadir}/games/tome
 %attr(775,root,games) /var/games/tome
