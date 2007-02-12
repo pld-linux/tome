@@ -3,7 +3,7 @@
 #
 %define		file_version	%(echo %{version} | tr -d .)
 Summary:	Troubles of Middle Earth - a roguelike game
-Summary(pl.UTF-8):   Gra roguelike "Troubles of Middle Earth"
+Summary(pl.UTF-8):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
 Version:	2.3.4
 Release:	1
