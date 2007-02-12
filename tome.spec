@@ -3,7 +3,7 @@
 #
 %define		file_version	%(echo %{version} | tr -d .)
 Summary:	Troubles of Middle Earth - a roguelike game
-Summary(pl):	Gra roguelike "Troubles of Middle Earth"
+Summary(pl.UTF-8):   Gra roguelike "Troubles of Middle Earth"
 Name:		tome
 Version:	2.3.4
 Release:	1
@@ -25,10 +25,10 @@ Troubles of Middle Earth (formerly PernAngband) is a complex roguelike
 game based on the world created by JRR Tolkien. ToME is one of many
 Angband variants.
 
-%description -l pl
+%description -l pl.UTF-8
 "Troubles of Middle Earth" (dawniej PernAngband) to rozbudowana gra
-roguelike osadzona w ¶wiecie stworzonym przez JRR Tolkiena. ToME jest
-jednym z wielu dostêpnych wariantów Angbandu.
+roguelike osadzona w Å›wiecie stworzonym przez JRR Tolkiena. ToME jest
+jednym z wielu dostÄ™pnych wariantÃ³w Angbandu.
 
 %prep
 %setup -q -n %{name}-%{file_version}-src
