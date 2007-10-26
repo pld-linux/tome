@@ -1,21 +1,25 @@
 # TODO:
-#	- disable IRC support?
+#	- move tome.cfg to proper /etc directory
+#	- fix putting scores into /var/games/tome
 #
 %define		file_version	%(echo %{version} | tr -d .)
+%define		_alpha		alpha17
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl.UTF-8):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
-Version:	2.3.4
-Release:	1
+Version:	3.0.0
+Release:	0.%{_alpha}.1
 License:	distributable
 Group:		Applications/Games
-Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}-src.tar.bz2
-# Source0-md5:	a97dc78e8964987adc6c0a796b560a14
+Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}%{_alpha}-src.tar.bz2
+# Source0-md5:	9e33b9c4fe4c79319e9523b06ddbbd15
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
-Patch1:		%{name}-paths.patch
+#to be fixed
+#Patch1:		%{name}-paths.patch
 URL:		http://www.t-o-m-e.net/
+BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
 Conflicts:	applnk < 1.5.13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,9 +35,9 @@ roguelike osadzona w świecie stworzonym przez JRR Tolkiena. ToME jest
 jednym z wielu dostępnych wariantów Angbandu.
 
 %prep
-%setup -q -n %{name}-%{file_version}-src
+%setup -q -n %{name}-%{file_version}%{_alpha}-src
 %patch0 -p1
-%patch1 -p1
+#%%patch1 -p1
 
 %build
 # Only build ncurses version (see makefile patch), because I didn't
@@ -41,14 +45,17 @@ jednym z wielu dostępnych wariantów Angbandu.
 cd src
 %{__make} -f makefile.std \
 	COPTS="%{rpmcflags}" \
-	CC="%{__cc}"
+	CC="%{__cc}" \
+	PREFIX="%{_prefix}" \
+	TOMENAME="%{name}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/games/tome/{cmov,dngn,edit,file,help,info,note,pref,scpt,user,mods},/var/games/tome/{apex,save,data,bone},%{_pixmapsdir},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/tome,%{_pixmapsdir},%{_desktopdir}}
 
-install -D src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
-cp -r lib/{cmov,core,dngn,edit,file,help,info,note,pref,scpt,user,mods,module.lua} $RPM_BUILD_ROOT%{_datadir}/games/tome
+install src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
+install tome.cfg $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+cp -r game $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 # do not copy placeholders; bones are unnecessary
 #cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
 
@@ -61,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.txt
-%attr(2755,root,games) %{_bindir}/%{name}
-%{_datadir}/games/tome
-%attr(775,root,games) /var/games/tome
-%{_pixmapsdir}/*
-%{_desktopdir}/*.desktop
+%attr(755,root,root) %{_bindir}/%{name}
+%{_datadir}/games/%{name}
+#%%attr(775,root,games) /var/games/tome
+%{_desktopdir}/tome.desktop
+%{_pixmapsdir}/tome.png
