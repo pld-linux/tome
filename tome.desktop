@@ -2,10 +2,9 @@
 Name=tome
 Comment=Troubles of Middle Earth
 Comment[pl]=Kłopoty śródziemia
-Icon=tome.png
+Icon=tome
 Exec=tome
 Terminal=true
 Type=Application
 Categories=ConsoleOnly;Game;RolePlaying;
-Encoding=UTF-8
 # vi: encoding=utf-8
