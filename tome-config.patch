@@ -1,0 +1,11 @@
+--- tome-300alpha18-src/tome.cfg~	2008-01-29 12:15:19.000000000 +0100
++++ tome-300alpha18-src/tome.cfg	2008-02-03 21:33:32.000000000 +0100
+@@ -4,7 +4,7 @@
+ {
+ 	{ TOME_CFG_PATH.."override", "no fail" },
+ 	{ TOME_WRITE_ROOT..".tome", "auto make", TOME_WRITE_ROOT, "/.tome" },
+-	TOME_CFG_PATH.."game",
++	"/usr/share/games/tome/game",
+ }
+ 
+ -- Make sure a trace of the error log is kept
