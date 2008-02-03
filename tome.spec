@@ -1,9 +1,8 @@
 # TODO:
-#	- move tome.cfg to proper /etc directory
 #	- fix putting scores into /var/games/tome
 #
 %define		file_version	%(echo %{version} | tr -d .)
-%define		_alpha		alpha17
+%define		_alpha		alpha18
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl.UTF-8):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
@@ -12,12 +11,13 @@ Release:	0.%{_alpha}.1
 License:	distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}%{_alpha}-src.tar.bz2
-# Source0-md5:	9e33b9c4fe4c79319e9523b06ddbbd15
+# Source0-md5:	c3d99855380c2c43c33269c7cd64a23c
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
 #to be fixed
 #Patch1:		%{name}-paths.patch
+Patch2:		%{name}-config.patch
 URL:		http://www.t-o-m-e.net/
 BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
@@ -38,6 +38,7 @@ jednym z wielu dostępnych wariantów Angbandu.
 %setup -q -n %{name}-%{file_version}%{_alpha}-src
 %patch0 -p1
 #%%patch1 -p1
+%patch2 -p1
 
 %build
 # Only build ncurses version (see makefile patch), because I didn't
@@ -51,10 +52,10 @@ cd src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/tome,%{_pixmapsdir},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/tome,%{_pixmapsdir},%{_desktopdir},%{_sysconfdir}}
 
 install src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
-install tome.cfg $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+install tome.cfg $RPM_BUILD_ROOT%{_sysconfdir}
 cp -r game $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 # do not copy placeholders; bones are unnecessary
 #cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
@@ -67,6 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tome.cfg
 %doc *.txt
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/games/%{name}
