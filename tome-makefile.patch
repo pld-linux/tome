@@ -1,18 +1,41 @@
---- tome-300alpha17-src/src/makefile.std~	2007-10-25 22:43:34.000000000 +0200
-+++ tome-300alpha17-src/src/makefile.std	2007-10-25 22:43:14.000000000 +0200
-@@ -30,9 +30,9 @@
+--- tome-300alpha18-src/src/makefile.std~	2008-02-04 14:27:25.000000000 +0100
++++ tome-300alpha18-src/src/makefile.std	2008-02-04 14:27:22.000000000 +0100
+@@ -16,13 +16,13 @@
+ ## of lib before you start the game.
+ ##
+ 
+-PREFIX ?= /usr/local
++PREFIX ?= /usr
+ X11BASE ?= /usr/X11R6
+ 
+ # Uncomment for those weird OSes that need this
+ #X11BASE = /usr
+ 
+-TOMENAME = tome3
++TOMENAME = tome
+ 
+ # Path where tome.cfg file lurks
+ # If not set it will be assumed to be in the same directory as the executable
+@@ -30,7 +30,7 @@
  # tome.cfg needs editing to point to the correct location
  
  # Where lib/ and tome.cfg files goes
 -LIBDIR = $(PREFIX)/games/$(TOMENAME)/
-+#LIBDIR = $(PREFIX)/games/$(TOMENAME)/
++#LIBDIR = $(PREFIX)/share/games/$(TOMENAME)/
  # Sysadmins of commercial Unix and/or BSD might prefer this
--#LIBDIR = $(PREFIX)/share/$(TOMENAME)/
-+LIBDIR = $(PREFIX)/share/games/$(TOMENAME)/
+ #LIBDIR = $(PREFIX)/share/$(TOMENAME)/
  # Another example: single user installation using absolute path
- #LIBDIR = /home/myloginname/lib/$(TOMENAME)/
- # If none are defined then tome will look for tome.cfg in the same
-@@ -106,17 +106,6 @@
+@@ -55,6 +55,9 @@
+ # Ignore this if you're not making a package
+ DESTDIR=
+ 
++CONFIGDIR = /etc/
++DATADIR= $(PREFIX)/share/games/$(TOMENAME)/
++
+ ##
+ ## 2. Some "system" definitions
+ ##
+@@ -106,17 +109,6 @@
  # including "USE_GETCH" and "USE_CURS_SET".  Note that "config.h" will
  # attempt to "guess" at many of these flags based on your system.
  #
@@ -30,7 +53,7 @@
  
  ##
  ## Variation -- Use "main-sdl.c" instead of "main-x11.c"
-@@ -153,10 +142,10 @@
+@@ -153,10 +145,10 @@
  ##
  ## Variation -- Only support "main-gcu.c" (not "main-x11.c")
  ##
@@ -45,3 +68,42 @@
  
  
  ##
+@@ -301,7 +293,7 @@
+ 
+ #
+ # If tome.cfg path is forced, well .. force it
+-DEFINES += `sh -c 'if test -n "$(LIBDIR)"; then echo -DFORCE_TOME_CFG_PATH=\"$(LIBDIR)\"; fi'`
++DEFINES += `sh -c 'if test -n "$(CONFIGDIR)"; then echo -DFORCE_TOME_CFG_PATH=\"$(CONFIGDIR)\"; fi'`
+ 
+ TOMEOBJS = \
+ 	birth.o \
+@@ -395,14 +387,6 @@
+ TARGET = $(TOMENAME)
+ 
+ default: $(TARGET)
+-	@echo "*** Note: In order to use the install rule, which now actually"
+-	@echo "*** handles the installation of the game dir, you need to edit"
+-	@echo "*** this makefile, going to the top and making sure LIBDIR suits"
+-	@echo "*** your desired install dir properly. The LIBRARY_DIR you used"
+-	@echo "*** to set in config.h is now ignored and obsolete with respect"
+-	@echo "*** to this makefile. Note that if you edit this makefile, you may"
+-	@echo "*** need to recompile so all the files that reference those defines"
+-	@echo "*** notice the changes."
+ 
+ $(TOLUA): $(TOLUADEP)
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(TOLUADEP) $(ALLLIBS)
+@@ -423,10 +407,11 @@
+ 
+ install: default
+ 	umask 022 ;\
+-	[ -d $(DESTDIR)$(LIBDIR) ] || mkdir -p $(DESTDIR)$(LIBDIR) ;\
++	[ -d $(DESTDIR)$(DATADIR) ] || mkdir -p $(DESTDIR)$(DATADIR) ;\
+ 	[ -d $(DESTDIR)$(BINDIR) ] || mkdir -p $(DESTDIR)$(BINDIR) ;\
+-	cp -f ../tome.cfg $(DESTDIR)$(LIBDIR) ;\
+-	cp -r ../game $(DESTDIR)$(LIBDIR) ;\
++	[ -d $(DESTDIR)$(CONFIGDIR) ] || mkdir -p $(DESTDIR)$(CONFIGDIR) ;\
++	cp -f ../tome.cfg $(DESTDIR)$(CONFIGDIR) ;\
++	cp -r ../game $(DESTDIR)$(DATADIR) ;\
+ 	cp -f $(TARGET) $(DESTDIR)$(BINDIR)$(TARGET)
+ 
+ #
