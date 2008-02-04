@@ -47,8 +47,7 @@ cd src
 %{__make} -f makefile.std \
 	COPTS="%{rpmcflags}" \
 	CC="%{__cc}" \
-	LDFLAGS="%{rpmldflags}" \
-	TOMENAME="%{name}"
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
