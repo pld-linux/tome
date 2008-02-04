@@ -47,18 +47,16 @@ cd src
 %{__make} -f makefile.std \
 	COPTS="%{rpmcflags}" \
 	CC="%{__cc}" \
-	PREFIX="%{_prefix}" \
+	LDFLAGS="%{rpmldflags}" \
 	TOMENAME="%{name}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/tome,%{_pixmapsdir},%{_desktopdir},%{_sysconfdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
-install src/tome $RPM_BUILD_ROOT%{_bindir}/%{name}
-install tome.cfg $RPM_BUILD_ROOT%{_sysconfdir}
-cp -r game $RPM_BUILD_ROOT%{_datadir}/games/%{name}
-# do not copy placeholders; bones are unnecessary
-#cp -r lib/{apex,save,data} $RPM_BUILD_ROOT/var/games/tome
+cd src
+%{__make} install -f makefile.std \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
