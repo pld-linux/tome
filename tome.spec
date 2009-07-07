@@ -2,7 +2,7 @@
 #	- fix putting scores into /var/games/tome
 #
 %define		file_version	%(echo %{version} | tr -d .)
-%define		_alpha		alpha18
+%define		_alpha		alpha19
 Summary:	Troubles of Middle Earth - a roguelike game
 Summary(pl.UTF-8):	Gra roguelike "Troubles of Middle Earth"
 Name:		tome
@@ -11,7 +11,7 @@ Release:	0.%{_alpha}.1
 License:	distributable
 Group:		Applications/Games
 Source0:	http://t-o-m-e.net/dl/src/%{name}-%{file_version}%{_alpha}-src.tar.bz2
-# Source0-md5:	c3d99855380c2c43c33269c7cd64a23c
+# Source0-md5:	7a993d72639da0f797a9e129b0b227de
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
